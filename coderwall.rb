@@ -5,12 +5,13 @@
 require "rubygems"
 require 'json'
 require 'net/http'
+require 'colored'
 #
 username = ARGV[0]
 #
 if username.nil? then
-  puts "no name provided"
-  puts $0 + " coderwall_username"
+  puts "no name provided".red
+  puts $0.red + " coderwall_username".red
 else
 base_url = "http://coderwall.com/" + username + ".json"
 resp     = Net::HTTP.get_response( URI.parse( base_url ) )
@@ -26,6 +27,6 @@ result["badges"].each { |i|
       file.write( response.body )
     end
   end
-  puts i["name"] + " -> " + i["description"]
+  puts i["name"].green + " -> " + i["description"].white
   }
 end
