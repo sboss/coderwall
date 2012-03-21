@@ -2,6 +2,7 @@
 # written (very badly) by scott boss
 #
 #
+require "rubygems"
 require 'json'
 require 'net/http'
 #
