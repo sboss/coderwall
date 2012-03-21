@@ -1,4 +1,4 @@
-# v0.1
+# v0.2
 # written (very badly) by scott boss
 #
 #
@@ -22,11 +22,16 @@ result["badges"].each { |i|
   uri = URI.parse( i["badge"] )
   Net::HTTP.start( uri.host,uri.port ) do |http|
     filename = i["name"] + ".png"
-    response = http.get( uri.path )
-    open( filename, "wb" ) do |file|
-      file.write( response.body )
+    if File::exists?( filename ) then
+      puts "already have ".red + filename
+    else
+      response = http.get( uri.path )
+      open( filename, "wb" ) do |file|
+        file.write( response.body )
+      end
+       puts i["name"].green + " -> " + i["description"].white
     end
   end
-  puts i["name"].green + " -> " + i["description"].white
+
   }
 end
