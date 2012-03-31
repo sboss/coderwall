@@ -21,7 +21,7 @@ result   = JSON.parse( data )
 result["badges"].each { |i|
   uri = URI.parse( i["badge"] )
   Net::HTTP.start( uri.host,uri.port ) do |http|
-    filename = i["name"] + ".png"
+    filename = i["name"].sub( / /, "_" ) + ".png"
     if File::exists?( filename ) then
       puts "already have ".red + filename
     else
